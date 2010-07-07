@@ -37,5 +37,8 @@ install -m644 src/reach.conf %{buildroot}/etc/reach/
 %doc src/example_usage.txt
 
 %changelog
+* Wed Jul 07 2010 Paul Morgan <pmorgan@redhat.com> 0.1.1-1
+- new package built with tito
+
 * Thu Mar 18 2010 Paul Morgan <pmorgan@redhat.com>
 - initial standalone package
