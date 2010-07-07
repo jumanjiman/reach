@@ -1,0 +1,25 @@
+#!/bin/bash
+
+function usage () {
+  echo "Usage: reach hostname | ip"
+  exit 1
+}
+
+[ -r /etc/reach/reach.conf ] && . /etc/reach/reach.conf
+
+[ -n "$PING_TMOUT" ] || PING_TMOUT=2
+
+if [ $# -ne 1 ]; then
+  echo -n "Error: "
+  usage
+else
+  TARGET=$1
+fi
+
+ping -c1 -s0 -W$PING_TMOUT $TARGET &> /dev/null
+STATUS=$?
+
+if [ $STATUS -ne 0 ]; then
+	echo "$TARGET is UNREACHABLE" >&2
+fi
+exit $STATUS

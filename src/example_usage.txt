@@ -1,0 +1,17 @@
+
+The `reach` command is a simple wrapper around `ping`.
+
+Benefits:
+
+* Check exit status to determine reachability of a host or IP
+* No output to /dev/stdout
+* Errors go to /dev/stderr
+
+Trivial example:
+
+for x in $(seq 1 100); do
+  hostname=server${x}.example.com
+  echo ========= $hostname ===========
+  reach $hostname || continue
+  ssh $hostname "uptime"
+done
