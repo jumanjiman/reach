@@ -1,12 +1,12 @@
 Name: reach
-Version: 0.1
+Version: 0.1.1
 release: 1
 buildarch: noarch
 packager: Paul Morgan <pmorgan@redhat.com>
 License: GPL v3
 URL: http://www.redhat.com
 group: Admin
-source: %{name}-%{version}.tgz
+source: %{name}-%{version}.tar.gz
 summary: Wrapper for the ping command
 requires: /bin/ping
 prereq: bash
@@ -28,13 +28,13 @@ rm -fr %{buildroot}
 %install
 rm -fr %{buildroot}
 mkdir -p %{buildroot}/{etc/reach,bin}
-install -m755 reach %{buildroot}/bin/
-install -m644 reach.conf %{buildroot}/etc/reach/
+install -m755 src/reach %{buildroot}/bin/
+install -m644 src/reach.conf %{buildroot}/etc/reach/
 
 %files
 /bin/reach
 %config(noreplace) /etc/reach/reach.conf
-%doc example_usage.txt
+%doc src/example_usage.txt
 
 %changelog
 * Thu Mar 18 2010 Paul Morgan <pmorgan@redhat.com>
