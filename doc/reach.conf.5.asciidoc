@@ -1,0 +1,53 @@
+reach.conf(5)
+=============
+
+NAME
+----
+reach.conf - Format of the reach config file
+
+
+
+DESCRIPTION
+-----------
+Controls the behavior of the `reach` command.
+This file should generally be owned by root
+with mode 644.
+
+
+FORMAT
+------
+PING_TMOUT='integer'::
+'integer' number of seconds to wait for a response from the remote host.
+The 'PING_TMOUT' environment variable overrides this config file.
+
+
+
+EXAMPLE
+-------
+
+----
+PING_TMOUT=2
+----
+
+
+FILES
+-----
+
+/etc/reach/reach.conf
+
+
+SEE ALSO
+--------
+reach(1)
+
+
+
+BUGS
+----
+Please report bugs and request enhancements
+to http://github.com/jumanjiman/reach/issues
+
+
+AUTHORS 
+-------
+Paul Morgan <jumanjiman@gmail.com>

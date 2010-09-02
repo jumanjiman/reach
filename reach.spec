@@ -24,7 +24,10 @@ Use reach instead of ping to simplify scripts.
 %{__rm} -rf %{buildroot}
 
 %build
-# nothing to build
+# convert manpages
+/usr/bin/a2x -d manpage -f manpage doc/reach.1.asciidoc
+/usr/bin/a2x -d manpage -f manpage doc/reach.conf.5.asciidoc
+
 
 %install
 %{__rm} -rf %{buildroot}
@@ -32,12 +35,19 @@ Use reach instead of ping to simplify scripts.
 %{__mkdir_p} %{buildroot}%{_bindir}
 %{__install} -p -m755 src/reach %{buildroot}%{_bindir}
 %{__install} -p -m644 src/reach.conf %{buildroot}%{_sysconfdir}/reach
+# manpages
+%{__mkdir_p} %{buildroot}%{_mandir}/man1
+%{__mkdir_p} %{buildroot}%{_mandir}/man5
+%{__gzip} -c doc/reach.1 > %{buildroot}/%{_mandir}/man1/reach.1.gz
+%{__gzip} -c doc/reach.conf.5 > %{buildroot}/%{_mandir}/man5/reach.conf.5.gz
+
 
 %files
 %defattr(-,root,root,-)
 %{_bindir}/reach
 %config(noreplace) %{_sysconfdir}/reach/reach.conf
-%doc src/example_usage.txt
+%doc %{_mandir}/man1/reach.1.gz
+%doc %{_mandir}/man5/reach.conf.5.gz
 
 %changelog
 * Wed Jul 07 2010 Paul Morgan <pmorgan@redhat.com> 0.1.1-1
