@@ -48,6 +48,7 @@ Use reach instead of ping to simplify scripts.
 %config(noreplace) %{_sysconfdir}/reach/reach.conf
 %doc %{_mandir}/man1/reach.1.gz
 %doc %{_mandir}/man5/reach.conf.5.gz
+%doc doc/COPYING
 
 %changelog
 * Wed Jul 07 2010 Paul Morgan <pmorgan@redhat.com> 0.1.1-1
