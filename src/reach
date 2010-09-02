@@ -2,24 +2,43 @@
 
 function usage () {
   echo "Usage: reach hostname | ip"
-  exit 1
 }
 
-[ -r /etc/reach/reach.conf ] && . /etc/reach/reach.conf
-
-[ -n "$PING_TMOUT" ] || PING_TMOUT=2
-
 if [ $# -ne 1 ]; then
-  echo -n "Error: "
   usage
+  exit 1
+fi
+
+declare target=$1
+declare _rc=0
+declare errors=""
+
+# use env variable PING_TMOUT if it exists
+# otherwise use config file
+if [[ -z $PING_TMOUT ]]; then
+  [ -r /etc/reach/reach.conf ] && . /etc/reach/reach.conf
+fi
+
+# source helpful functions
+[ -r /etc/reach/functions ] && . /etc/reach/functions || {
+  echo "ERROR: /etc/reach/functions missing or unreadable"
+  exit 255
+  } >&2
+
+# timeout must be positive
+[[ $PING_TMOUT -gt 0 ]] || PING_TMOUT=2
+
+if is_ipv6 $target; then
+  cmd=$(which ping6)
 else
-  TARGET=$1
+  cmd=$(which ping)
 fi
+errors="$($cmd -c1 -s0 -W$PING_TMOUT $target 2>&1)"
+_rc=$?
 
-ping -c1 -s0 -W$PING_TMOUT $TARGET &> /dev/null
-STATUS=$?
-
-if [ $STATUS -ne 0 ]; then
-	echo "$TARGET is UNREACHABLE" >&2
+if [ $_rc -eq 1 ]; then
+	echo "$target is UNREACHABLE" >&2
+elif [ $_rc -eq 2 ]; then
+	echo "$errors" >&2
 fi
-exit $STATUS
+exit $_rc

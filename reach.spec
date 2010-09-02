@@ -36,7 +36,8 @@ Use reach instead of ping to simplify scripts.
 %{__mkdir_p} %{buildroot}%{_sysconfdir}/reach
 %{__mkdir_p} %{buildroot}%{_bindir}
 %{__install} -p -m755 src/reach %{buildroot}%{_bindir}
-%{__install} -p -m644 src/reach.conf %{buildroot}%{_sysconfdir}/reach
+%{__install} -p -m644 src/config/reach.conf %{buildroot}%{_sysconfdir}/reach
+%{__install} -p -m644 src/config/functions %{buildroot}%{_sysconfdir}/reach
 # manpages
 %{__mkdir_p} %{buildroot}%{_mandir}/man1
 %{__mkdir_p} %{buildroot}%{_mandir}/man5
@@ -48,9 +49,11 @@ Use reach instead of ping to simplify scripts.
 %defattr(-,root,root,-)
 %{_bindir}/reach
 %config(noreplace) %{_sysconfdir}/reach/reach.conf
+%config %{_sysconfdir}/reach/functions
 %doc %{_mandir}/man1/reach.1.gz
 %doc %{_mandir}/man5/reach.conf.5.gz
 %doc doc/COPYING
+%doc doc/examples/check_hosts_file.sh
 
 %changelog
 * Thu Sep 02 2010 Paul Morgan <jumanjiman@gmail.com> 0.2-2

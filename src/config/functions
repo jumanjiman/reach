@@ -1,0 +1,17 @@
+function is_ipv4() {
+  declare -a octets
+  octets=( $(tr '.' ' ' <<< $1) )
+  [[ ${#octets[@]} -eq 4 ]] || return 1
+  for octet in ${octets[@]}; do
+    [ $octet -ge 0 -a $octet -le 255 ] &> /dev/null || return 1
+  done
+}
+
+function is_ipv6() {
+  declare -a elements
+  is_ipv4 $1 && return 1
+  grep -q ':' <<< $1 || return 1
+  elements=( $(tr ':' ' ' <<< $1) )
+  [ ${#elements[@]} -ge 1 -a ${#elements[@]} -lt 16 ] || return 1
+  # to-do: inspect each element
+}
