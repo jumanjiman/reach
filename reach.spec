@@ -1,17 +1,18 @@
 Name: reach
-Version: 0.1.1
-release: 1
-buildarch: noarch
-packager: Paul Morgan <pmorgan@redhat.com>
-License: GPL v3
-URL: http://www.redhat.com
-group: Admin
-source: %{name}-%{version}.tar.gz
 summary: Wrapper for the ping command
-requires: /bin/ping
-prereq: bash
-BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
+Version: 0.2
+release: 0%{?dist}
+License: GPL v3
+group: Applications/System
+
+URL: http://github.com/jumanjiman/reach
+source: %{name}-%{version}.tar.gz
+BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
+buildarch: noarch
+
+requires: /bin/ping
+requires: bash
 
 %description
 Use reach instead of ping to simplify scripts.
@@ -20,20 +21,22 @@ Use reach instead of ping to simplify scripts.
 %setup -q
 
 %clean
-rm -fr %{buildroot}
+%{__rm} -rf %{buildroot}
 
 %build
 # nothing to build
 
 %install
-rm -fr %{buildroot}
-mkdir -p %{buildroot}/{etc/reach,bin}
-install -m755 src/reach %{buildroot}/bin/
-install -m644 src/reach.conf %{buildroot}/etc/reach/
+%{__rm} -rf %{buildroot}
+%{__mkdir_p} %{buildroot}%{_sysconfdir}/reach
+%{__mkdir_p} %{buildroot}%{_bindir}
+%{__install} -p -m755 src/reach %{buildroot}%{_bindir}
+%{__install} -p -m644 src/reach.conf %{buildroot}%{_sysconfdir}/reach
 
 %files
-/bin/reach
-%config(noreplace) /etc/reach/reach.conf
+%defattr(-,root,root,-)
+%{_bindir}/reach
+%config(noreplace) %{_sysconfdir}/reach/reach.conf
 %doc src/example_usage.txt
 
 %changelog
