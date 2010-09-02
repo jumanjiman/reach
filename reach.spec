@@ -2,7 +2,7 @@ Name: reach
 summary: Wrapper for the ping command
 
 Version: 0.2
-release: 0%{?dist}
+release: 1%{?dist}
 License: GPL v3
 group: Applications/System
 
@@ -51,6 +51,11 @@ Use reach instead of ping to simplify scripts.
 %doc doc/COPYING
 
 %changelog
+* Thu Sep 02 2010 Paul Morgan <jumanjiman@gmail.com> 0.2-1
+- add copy of GPLv3
+- add man pages
+- bump version
+
 * Wed Jul 07 2010 Paul Morgan <pmorgan@redhat.com> 0.1.1-1
 - new package built with tito
 
