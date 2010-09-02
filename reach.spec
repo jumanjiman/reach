@@ -11,6 +11,8 @@ source: %{name}-%{version}.tar.gz
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 buildarch: noarch
 
+buildrequires: asciidoc
+
 requires: /bin/ping
 requires: bash
 
