@@ -1,8 +1,8 @@
 Name: reach
 summary: Wrapper for the ping command
 
-Version: 0.2
-release: 3%{?dist}
+Version: 0.3
+release: 0%{?dist}
 License: GPL v3
 group: Applications/System
 
