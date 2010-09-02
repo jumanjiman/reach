@@ -2,7 +2,7 @@ Name: reach
 summary: Wrapper for the ping command
 
 Version: 0.3
-release: 0%{?dist}
+release: 1%{?dist}
 License: GPL v3
 group: Applications/System
 
@@ -56,6 +56,9 @@ Use reach instead of ping to simplify scripts.
 %doc doc/examples/check_hosts_file.sh
 
 %changelog
+* Thu Sep 02 2010 Paul Morgan <jumanjiman@gmail.com> 0.3-1
+- bump version
+
 * Thu Sep 02 2010 Paul Morgan <jumanjiman@gmail.com> 0.2-3
 - add functions and example non-trivial script
 - add unit test.sh
