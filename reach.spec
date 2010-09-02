@@ -14,7 +14,7 @@ buildarch: noarch
 buildrequires: asciidoc
 
 requires: /bin/ping
-requires: bash
+requires: bash >= 4.0
 
 %description
 Use reach instead of ping to simplify scripts.
