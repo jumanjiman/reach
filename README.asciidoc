@@ -1,0 +1,80 @@
+reach(1)
+========
+
+NAME
+----
+reach - wrapper around the `ping` command
+
+
+SYNOPSIS
+--------
+reach 'hostname' | 'ip'
+
+
+DESCRIPTION
+-----------
+The `reach` command is a simple wrapper around `ping` and `ping6`.
+`reach` has a configuration file to adjust its behavior. Benefits:
+
+* Check exit status to determine reachability of a host or IP.
+The exit status of `ping` or `ping6` is passed through
+as the exit status of `reach`. 
+* No output to `/dev/stdout`
+* Errors go to `/dev/stderr`
+* Reduces complexity of other scripts
+
+
+
+OPTIONS
+-------
+None.
+
+
+
+ENVIRONMENT
+-----------
+PING_TMOUT::
+The number of seconds to wait for a response
+from the target host.
+
+
+EXAMPLE
+-------
+
+----
+for x in $(seq 1 5); do
+  echo -n "server${x}.example.com: "
+  reach server${x}.example.com || { echo; continue; }
+  ssh server${x}.example.com "uptime"
+done
+----
+
+
+
+FILES
+-----
+
+/etc/reach/reach.conf
+
+/etc/reach/functions
+
+
+SEE ALSO
+--------
+reach.conf(5)
+
+ping(1)
+
+ping6(1)
+
+
+
+BUGS
+----
+Please report bugs and request enhancements
+to http://github.com/jumanjiman/reach/issues
+
+
+AUTHORS 
+-------
+Paul Morgan <jumanjiman@gmail.com>
