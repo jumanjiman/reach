@@ -56,6 +56,8 @@ FILES
 
 /etc/reach/reach.conf
 
+/etc/reach/functions
+
 
 SEE ALSO
 --------
