@@ -2,7 +2,7 @@ Name: reach
 summary: Wrapper for the ping command
 
 Version: 0.2
-release: 1%{?dist}
+release: 2%{?dist}
 License: GPL v3
 group: Applications/System
 
@@ -53,6 +53,9 @@ Use reach instead of ping to simplify scripts.
 %doc doc/COPYING
 
 %changelog
+* Thu Sep 02 2010 Paul Morgan <jumanjiman@gmail.com> 0.2-2
+- build requires asciidoc
+
 * Thu Sep 02 2010 Paul Morgan <jumanjiman@gmail.com> 0.2-1
 - add copy of GPLv3
 - add man pages
